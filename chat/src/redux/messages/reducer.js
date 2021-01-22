@@ -17,15 +17,19 @@ export const messageReducer = (state = initialMessageState, action) => {
           },
         ],
       };
-    // case RECEIVE_MESSAGE:
-    //   return state.concat([
-    //     {
-    //       id: v4(),
-    //       from: action.payload.from,
-    //       message: action.payload.message,
-    //       time: new Date().toISOString(),
-    //     },
-    //   ]);
+    case RECEIVE_MESSAGE:
+      return {
+        ...state,
+        arr: [
+          ...(state.arr || []),
+          {
+            id: v4(),
+            from: action.payload.from,
+            message: action.payload.message,
+            time: new Date().toISOString(),
+          },
+        ],
+      };
 
     default:
       return state;
