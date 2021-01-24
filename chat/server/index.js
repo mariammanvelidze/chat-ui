@@ -8,22 +8,27 @@ const broadcast = (data, ws) => {
     }
   });
 };
-const users = [];
+
 wss.on("connection", (ws) => {
-  users.push(ws);
-  // console.log(users);
-  console.log("someone connected");
+  console.log("user connected");
   ws.on("message", (message) => {
-    console.log("message sent: ", message);
     const data = JSON.parse(message);
-    users.forEach((client) => client.send(JSON.stringify(data)));
-    // broadcast(data, ws);
+    switch (data.type) {
+      case "SEND_MESSAGE":
+        broadcast(
+          {
+            type: "SEND_MESSAGE",
+            from: data.payload.from,
+            message: data.payload.message,
+          },
+          ws
+        );
+        break;
+      default:
+        break;
+    }
   });
-  // ws.on("message", (data) => {
-  //   console.log("sentdata: ", data);
-  //   ws.send(data.toUpperCase());
-  // });
   ws.on("close", () => {
-    console.log("someone disconnected");
+    console.log("user disconnected");
   });
 });

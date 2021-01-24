@@ -5,9 +5,9 @@ export const userReducer = (state = [], action) => {
   switch (action.type) {
     case SET_USERNAME:
       return {
-        ...state,
+        // ...state,
         id: v4(),
-        username: action.payload,
+        username: action.username,
       };
     default:
       return state;

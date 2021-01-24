@@ -1,2 +1,2 @@
 export { setUsername } from "./username/actions";
-export { sendMessage } from "./messages/actions";
+export { sendMessage, receiveMessage } from "./messages/actions";

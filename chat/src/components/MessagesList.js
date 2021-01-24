@@ -1,13 +1,13 @@
 import React from "react";
-import Message from "./Message";
 import { connect } from "react-redux";
+import v4 from "node-uuid";
 
 function MessagesList(props) {
   return (
     <div className="messages-list">
       <ul>
         {props.messages.map((message) => (
-          <li key={message.id} {...message}>
+          <li key={v4()} {...message}>
             <span>{message.from}</span>: {message.message}
           </li>
         ))}

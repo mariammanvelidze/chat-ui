@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { setUsername } from "../redux/actionCreators";
 import SendMessage from "./SendMessage";
-import Message from "./Message";
 import MessagesList from "./MessagesList";
+import ReactNotifications, { store } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 function Chat(props) {
   return (
     <div>
+      <ReactNotifications />
       <section>
         <h1>Hello, {props.username}</h1>
         <Link to="/">
@@ -17,9 +19,6 @@ function Chat(props) {
         </Link>
         <MessagesList />
         <SendMessage />
-      </section>
-      <section>
-        <div className="users-list"></div>
       </section>
     </div>
   );

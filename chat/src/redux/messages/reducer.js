@@ -9,9 +9,8 @@ export const messageReducer = (state = initialMessageState, action) => {
       return {
         ...state,
         arr: [
-          ...(state.arr || []),
+          ...state.arr,
           {
-            id: v4(),
             from: action.payload.from,
             message: action.payload.message,
           },

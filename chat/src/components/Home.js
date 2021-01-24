@@ -4,31 +4,37 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
 function Home(props) {
+  const userName = useRef();
   function handleSubmit(e) {
     let username = userName.current.value;
     e.preventDefault();
     if (username.trim().length < 2) {
-      alert(1);
+      alert("Your username should be longer");
     } else {
       props.setUsername(username.trim());
     }
   }
 
-  const userName = useRef();
+  const username = props.username;
+
   return (
     <div className="homepage">
+      {!props.username && <h2>Set you username first.</h2>}
+      {props.username && (
+        <h2>You have already set your uername to: {props.username}.</h2>
+      )}
       <h1>Choose Username</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="username-form">
         <input type="text" name="username" ref={userName} />
-        {/* <Link to="/chat"> */}
         <button type="submit" className="set-username">
           set username
         </button>
-        {/* </Link> */}
       </form>
-      <Link to="/chat">
-        <button>Go to Chat</button>
-      </Link>
+      {props.username && (
+        <Link to="/chat">
+          <button>Go to Chat</button>
+        </Link>
+      )}
     </div>
   );
 }

@@ -1,36 +1,41 @@
 import React, { useRef } from "react";
 import { connect } from "react-redux";
-import { sendMessage } from "../redux/actionCreators";
+import { sendMessage, receiveMessage } from "../redux/actionCreators";
 import { SEND_MESSAGE } from "../redux/messages/actionTypes";
 
+import { store } from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 function SendMessage(props) {
   const messageToSend = useRef();
   const ws = new WebSocket("ws://localhost:3001");
-  ws.addEventListener("open", () => {});
+
   function handleSubmit(e) {
     e.preventDefault();
     let message = messageToSend.current.value;
-    props.sendMessage(props.username, message);
-    const data = {
-      username: props.username,
-      message: message,
-    };
-    ws.send(JSON.stringify(data));
+    ws.send(JSON.stringify(props.sendMessage(props.username, message)));
     messageToSend.current.value = "";
   }
 
-  // ws.addEventListener("opens", () => {
-  //   console.log("here we are");
-  //    ws.send("hey there");
-  // });
-
   ws.onmessage = (message) => {
-    console.log(JSON.parse(message.data));
     const data = JSON.parse(message.data);
-    props.sendMessage(data.username, data.message);
+    store.addNotification({
+      title: data.from,
+      message: data.message,
+      type: "success",
+      container: "top-right",
+      insert: "top",
+    });
+    switch (data.type) {
+      case SEND_MESSAGE:
+        props.receiveMessage(data.from, data.message);
+        break;
+      default:
+        break;
+    }
   };
   return (
-    <div>
+    <div className="input-field">
+      {/* <ReactNotifications /> */}
       <form onSubmit={handleSubmit}>
         <input type="text" name="message" ref={messageToSend} />
         <button type="submit" className="sendButton">
@@ -52,6 +57,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     sendMessage: (from, message) => dispatch(sendMessage(from, message)),
+    receiveMessage: (from, message) => dispatch(receiveMessage(from, message)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(SendMessage);
