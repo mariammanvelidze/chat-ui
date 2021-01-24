@@ -39,7 +39,7 @@ function SendMessage(props) {
   return (
     <div className="input-field">
       {/* <ReactNotifications /> */}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="message-input">
         <input
           type="text"
           autocomplete="off"

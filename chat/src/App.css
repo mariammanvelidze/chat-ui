@@ -69,6 +69,7 @@ section {
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
+  border-radius: 10px;
 }
 
 .new-message {
@@ -96,9 +97,10 @@ button:hover {
 }
 
 input {
-  width: 85%;
+  width: 81%;
   height: 50px;
   border-radius: 5px;
+  border: none;
 }
 
 .sentByMe {
@@ -125,7 +127,7 @@ ul li {
 .sendButton {
   padding: 0;
   height: 50px;
-  width: 15%;
+  width: 18%;
 }
 
 .notifications-component {
@@ -141,4 +143,26 @@ ul li {
 
 .username-color {
   color: rgb(211, 142, 142);
+}
+.message-input {
+  margin-top: 1%;
+  display: flex;
+  justify-content: space-between;
+}
+/* scrollbar */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
 }
