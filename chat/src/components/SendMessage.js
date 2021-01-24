@@ -19,11 +19,14 @@ function SendMessage(props) {
   ws.onmessage = (message) => {
     const data = JSON.parse(message.data);
     store.addNotification({
-      title: data.from,
-      message: data.message,
-      type: "success",
+      title: "You've got a new message",
+      message: `${data.from}: ${data.message}`,
+      type: "warning",
       container: "top-right",
       insert: "top",
+      dismiss: {
+        duration: 2000,
+      },
     });
     switch (data.type) {
       case SEND_MESSAGE:
