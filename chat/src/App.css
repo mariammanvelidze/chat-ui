@@ -115,6 +115,10 @@ ul {
 ul li {
   list-style-type: none;
   font-size: 20px;
+  /* background-color: rgb(211, 142, 142); */
+  border-radius: 10px;
+  margin-bottom: 5px;
+  padding: 2px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -126,4 +130,15 @@ ul li {
 
 .notifications-component {
   position: static;
+}
+
+.username-logout {
+  margin-bottom: 10%;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.username-color {
+  color: rgb(211, 142, 142);
 }

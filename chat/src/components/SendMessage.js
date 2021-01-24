@@ -37,7 +37,12 @@ function SendMessage(props) {
     <div className="input-field">
       {/* <ReactNotifications /> */}
       <form onSubmit={handleSubmit}>
-        <input type="text" name="message" ref={messageToSend} />
+        <input
+          type="text"
+          autocomplete="off"
+          name="message"
+          ref={messageToSend}
+        />
         <button type="submit" className="sendButton">
           send
         </button>

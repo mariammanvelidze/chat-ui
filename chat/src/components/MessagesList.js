@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
     messages: state.messages.arr,
     id: state.messages.arr.id,
     from: state.messages.arr.from,
+    username: state.user.username,
     message: state.messages.arr.message,
   };
 };

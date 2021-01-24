@@ -15,8 +15,6 @@ function Home(props) {
     }
   }
 
-  const username = props.username;
-
   return (
     <div className="homepage">
       {!props.username && <h2>Set you username first.</h2>}
