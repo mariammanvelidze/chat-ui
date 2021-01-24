@@ -5,9 +5,9 @@ import { SEND_MESSAGE } from "../redux/messages/actionTypes";
 
 import { store } from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+const ws = new WebSocket("ws://localhost:3001");
 function SendMessage(props) {
   const messageToSend = useRef();
-  const ws = new WebSocket("ws://localhost:3001");
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -31,18 +31,19 @@ function SendMessage(props) {
     switch (data.type) {
       case SEND_MESSAGE:
         props.receiveMessage(data.from, data.message);
+        console.log("recive message");
         break;
       default:
         break;
     }
   };
+
   return (
     <div className="input-field">
-      {/* <ReactNotifications /> */}
       <form onSubmit={handleSubmit} className="message-input">
         <input
           type="text"
-          autocomplete="off"
+          autoComplete="off"
           name="message"
           ref={messageToSend}
         />
@@ -53,6 +54,7 @@ function SendMessage(props) {
     </div>
   );
 }
+
 const mapStateToProps = (state) => {
   return {
     messages: state.messages.arr,
@@ -68,4 +70,5 @@ const mapDispatchToProps = (dispatch) => {
     receiveMessage: (from, message) => dispatch(receiveMessage(from, message)),
   };
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(SendMessage);
