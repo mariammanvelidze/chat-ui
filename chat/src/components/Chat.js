@@ -9,7 +9,6 @@ import "react-notifications-component/dist/theme.css";
 function Chat(props) {
   return (
     <div>
-      <ReactNotifications />
       <section className="chat-section">
         <div className="username-logout">
           <h1>

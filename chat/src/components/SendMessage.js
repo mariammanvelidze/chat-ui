@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { sendMessage, receiveMessage } from "../redux/actionCreators";
 import { SEND_MESSAGE } from "../redux/messages/actionTypes";
 
-import { store } from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
 const ws = new WebSocket("ws://localhost:3001");
 function SendMessage(props) {
   const messageToSend = useRef();
@@ -16,18 +14,15 @@ function SendMessage(props) {
     messageToSend.current.value = "";
   }
 
+  function setDocTitle() {
+    document.title = "Chat";
+  }
+
   ws.onmessage = (message) => {
     const data = JSON.parse(message.data);
-    store.addNotification({
-      title: "You've got a new message",
-      message: `${data.from}: ${data.message}`,
-      type: "warning",
-      container: "top-right",
-      insert: "top",
-      dismiss: {
-        duration: 2000,
-      },
-    });
+    if (document.hidden) {
+      document.title = "New Unread Messages";
+    }
     switch (data.type) {
       case SEND_MESSAGE:
         props.receiveMessage(data.from, data.message);
@@ -46,6 +41,7 @@ function SendMessage(props) {
           autoComplete="off"
           name="message"
           ref={messageToSend}
+          onFocus={setDocTitle}
         />
         <button type="submit" className="sendButton">
           send
