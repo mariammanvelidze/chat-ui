@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import { setUsername } from "../redux/actionCreators";
 import SendMessage from "./SendMessage";
 import MessagesList from "./MessagesList";
-import ReactNotifications from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
+
 function Chat(props) {
   return (
     <section className="chat-section">
