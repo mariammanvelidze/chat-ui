@@ -10,7 +10,9 @@ function SendMessage(props) {
   function handleSubmit(e) {
     e.preventDefault();
     let message = messageToSend.current.value;
-    ws.send(JSON.stringify(props.sendMessage(props.username, message)));
+    if (message) {
+      ws.send(JSON.stringify(props.sendMessage(props.username, message)));
+    }
     messageToSend.current.value = "";
   }
 
@@ -26,7 +28,6 @@ function SendMessage(props) {
     switch (data.type) {
       case SEND_MESSAGE:
         props.receiveMessage(data.from, data.message);
-        console.log("recive message");
         break;
       default:
         break;
@@ -40,6 +41,7 @@ function SendMessage(props) {
           type="text"
           autoComplete="off"
           name="message"
+          placeholder="Type a message..."
           ref={messageToSend}
           onFocus={setDocTitle}
         />
