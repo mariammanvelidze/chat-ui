@@ -19,5 +19,5 @@ const store = createStore(
 store.subscribe(() => {
   saveState(store.getState());
 });
-console.log(store.getState());
+
 export default store;

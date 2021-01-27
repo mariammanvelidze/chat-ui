@@ -3,11 +3,9 @@ import { connect } from "react-redux";
 import v4 from "node-uuid";
 function MessagesList(props) {
   const renderMessage = (message) => {
-    let username = props.username;
-    if (username === message.from) {
+    if (!("time" in message)) {
       return (
         <li key={v4()} {...message} className="sent-by-me">
-          {/* <span className="message-user">{message.from}</span> */}
           <span className="message-text"> {message.message}</span>
         </li>
       );
