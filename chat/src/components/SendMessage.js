@@ -20,11 +20,20 @@ function SendMessage(props) {
     document.title = "Chat";
   }
 
+  function scrollDown() {
+    document.getElementsByClassName(
+      "messages-list"
+    )[0].scrollTop = document.getElementsByClassName(
+      "messages-list"
+    )[0].scrollHeight;
+  }
+
   ws.onmessage = (message) => {
     const data = JSON.parse(message.data);
     if (document.hidden) {
       document.title = "New Unread Messages";
     }
+    scrollDown();
     switch (data.type) {
       case SEND_MESSAGE:
         props.receiveMessage(data.from, data.message);

@@ -177,7 +177,7 @@ input {
 
 /* scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -185,11 +185,11 @@ input {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #555;
+  background: rgb(184, 183, 183);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #333;
+  background: #616161;
 }
 
 /* responsive */
