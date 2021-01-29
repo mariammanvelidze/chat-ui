@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { sendMessage, receiveMessage } from "../redux/actionCreators";
 import { SEND_MESSAGE } from "../redux/messages/actionTypes";
 
-const ws = new WebSocket("ws://localhost:3001");
+let HOST = window.location.origin.replace(/^http/, "ws");
+let ws = new WebSocket(HOST);
 function SendMessage(props) {
   const messageToSend = useRef();
 
