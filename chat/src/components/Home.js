@@ -17,7 +17,7 @@ function Home(props) {
 
   return (
     <div className="homepage">
-      {!props.username && <h2>Set you username first.</h2>}
+      {!props.username && <h2>Set your username first.</h2>}
       {props.username && (
         <h2>You have already set your uername to: {props.username}.</h2>
       )}
