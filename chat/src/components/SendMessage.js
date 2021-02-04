@@ -34,7 +34,10 @@ function SendMessage(props) {
 
   ws.onmessage = (message) => {
     const data = JSON.parse(message.data);
-    props.sendMessage(data[0].from, data[0].message);
+    console.log(data);
+    for (let i = 0; i < data.length; i++) {
+      props.sendMessage(data[i].from, data[i].message);
+    }
     if (document.hidden) {
       document.title = "New Unread Messages";
     }
