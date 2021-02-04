@@ -25,6 +25,7 @@ function Chat(props) {
 const mapStateToProps = (state) => {
   return {
     username: state.user.username,
+    messages: state.messages.arr,
   };
 };
 const mapDispatchToProps = (dispatch) => {

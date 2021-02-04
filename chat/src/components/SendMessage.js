@@ -1,10 +1,8 @@
 import React, { useRef } from "react";
 import { connect } from "react-redux";
 import { sendMessage, receiveMessage } from "../redux/actionCreators";
-import { SEND_MESSAGE } from "../redux/messages/actionTypes";
 
-let HOST = window.location.origin.replace(/^http/, "ws");
-let ws = new WebSocket(HOST);
+let ws = new WebSocket("ws://chat.shas.tel");
 function SendMessage(props) {
   const messageToSend = useRef();
 
@@ -12,7 +10,12 @@ function SendMessage(props) {
     e.preventDefault();
     let message = messageToSend.current.value;
     if (message) {
-      ws.send(JSON.stringify(props.sendMessage(props.username, message)));
+      ws.send(
+        JSON.stringify({
+          from: props.username,
+          message,
+        })
+      );
     }
     messageToSend.current.value = "";
   }
@@ -31,17 +34,11 @@ function SendMessage(props) {
 
   ws.onmessage = (message) => {
     const data = JSON.parse(message.data);
+    props.sendMessage(data[0].from, data[0].message);
     if (document.hidden) {
       document.title = "New Unread Messages";
     }
     scrollDown();
-    switch (data.type) {
-      case SEND_MESSAGE:
-        props.receiveMessage(data.from, data.message);
-        break;
-      default:
-        break;
-    }
   };
 
   return (
