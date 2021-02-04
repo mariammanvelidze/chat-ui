@@ -35,7 +35,7 @@ function SendMessage(props) {
   ws.onmessage = (message) => {
     const data = JSON.parse(message.data);
     console.log(data);
-    for (let i = 0; i < data.length; i++) {
+    for (let i = data.length - 1; i >= 0; i--) {
       props.sendMessage(data[i].from, data[i].message);
     }
     if (document.hidden) {
