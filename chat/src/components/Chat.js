@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { setUsername } from "../redux/actionCreators";
@@ -6,6 +6,18 @@ import SendMessage from "./SendMessage";
 import MessagesList from "./MessagesList";
 
 function Chat(props) {
+  const [WSState, setWSState] = useState();
+
+  useEffect(() => {
+    const ws = new WebSocket("ws://chat.shas.tel");
+    ws.onopen = () => {
+      setWSState(ws);
+    };
+
+    return () => {
+      ws.close();
+    };
+  }, [props.username]);
   return (
     <section className="chat-section">
       <div className="username-logout">
@@ -17,7 +29,7 @@ function Chat(props) {
         </Link>
       </div>
       <MessagesList />
-      <SendMessage />
+      {WSState && <SendMessage ws={WSState} />}
     </section>
   );
 }

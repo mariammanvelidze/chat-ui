@@ -2,9 +2,9 @@ import React, { useRef } from "react";
 import { connect } from "react-redux";
 import { sendMessage, receiveMessage } from "../redux/actionCreators";
 
-let ws = new WebSocket("ws://chat.shas.tel");
 function SendMessage(props) {
   const messageToSend = useRef();
+  const { ws } = props;
 
   function handleSubmit(e) {
     e.preventDefault();
